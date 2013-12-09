@@ -6,7 +6,7 @@ A gem that generates random starting hands with a CSV file of your MTG Deck !
 # Usage
 
 In your terminal :
-MtgHand::Deck.read("path/to/your/deck.csv")
+<tt>MtgHand::Deck.read("path/to/your/deck.csv")</tt>
 
-* MtgHand::Deck.hand will generate a starting hand.
-* mtgHand::Deck.mulligan will make a mulligan (generate another starting hand with one card less).
+* <tt>MtgHand::Deck.hand</tt> will generate a starting hand of previously read deck.
+* <tt>mtgHand::Deck.mulligan</tt> will make a mulligan (generate another starting hand with one card less).
