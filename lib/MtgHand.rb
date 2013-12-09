@@ -21,20 +21,25 @@ module MtgHand
     end
 
     def self.hand
+      @cards_in_hand ||= 7
+
       puts "====================="
       puts "    STARTING HAND    "
       puts "====================="
-      hand = @decklist.sample(7)
+
+      hand = @decklist.sample(@cards_in_hand)
       hand.each do |card|
         puts card.cmc + " | " + card.mana_symbols + " | " + card.name + " | " + card.type
       end
+
       puts "====================="
       hand_analysis(hand)
       puts "====================="
     end
 
-    def self.hand_analysis (hand)
+    def self.hand_analysis(hand)
       lands = 0
+
       hand.each do |card|
         card.type == "land" ? lands += 1 : nil
       end
@@ -43,6 +48,11 @@ module MtgHand
       else
         puts lands.to_s + " lands in your starting hand."
       end
+    end
+
+    def self.mulligan
+      @cards_in_hand -= 1
+      MtgHand::Deck.hand
     end
 
   end
