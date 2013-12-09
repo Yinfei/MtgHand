@@ -9,4 +9,4 @@ In your terminal :
 <tt>MtgHand::Deck.read("path/to/your/deck.csv")</tt>
 
 * <tt>MtgHand::Deck.hand</tt> will generate a starting hand of previously read deck.
-* <tt>mtgHand::Deck.mulligan</tt> will make a mulligan (generate another starting hand with one card less).
+* <tt>MtgHand::Deck.mulligan</tt> will make a mulligan (generate another starting hand with one card less).
