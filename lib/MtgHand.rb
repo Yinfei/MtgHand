@@ -18,6 +18,9 @@ module MtgHand
           @decklist << new_card
         }
       end
+
+      # Reset cards in hand after previous mulligans
+      @cards_in_hand = 7
     end
 
     def self.hand
@@ -51,8 +54,12 @@ module MtgHand
     end
 
     def self.mulligan
-      @cards_in_hand -= 1
+      if @cards_in_hand <= 1
+        puts "you can't mulligan anymore. No cards in hand !"
+      else
+        @cards_in_hand -= 1
       MtgHand::Deck.hand
+      end
     end
 
   end
