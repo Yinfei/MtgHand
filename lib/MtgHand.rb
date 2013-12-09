@@ -1,10 +1,14 @@
 require 'csv'
+require 'fileutils'
 
 module MtgHand
 
   class Deck
 
     def self.read(file)
+      @file = file
+      # Reset cards in hand after previous mulligans
+      @cards_in_hand = 7
       @deckfile = CSV.read(file, headers: true, col_sep: ";")
       @decklist = []
       @deckfile.each do |card|
@@ -18,9 +22,15 @@ module MtgHand
           @decklist << new_card
         }
       end
+    end
 
-      # Reset cards in hand after previous mulligans
-      @cards_in_hand = 7
+    def self.save
+      destination_folder = ENV["HOME"] + "/decks/"
+      destination_file = ENV["HOME"] + "/decks/" + File.basename(@file)
+      if Dir.exists?(destination_folder) == false
+        Dir.mkdir(destination_folder)
+      end
+        FileUtils.copy(@file, destination_file)
     end
 
     def self.hand
@@ -46,6 +56,7 @@ module MtgHand
       hand.each do |card|
         card.type == "land" ? lands += 1 : nil
       end
+
       if lands <= 1
         puts lands.to_s + " land in your starting hand."
       else
@@ -58,7 +69,7 @@ module MtgHand
         puts "you can't mulligan anymore. No cards in hand !"
       else
         @cards_in_hand -= 1
-      MtgHand::Deck.hand
+        MtgHand::Deck.hand
       end
     end
 
