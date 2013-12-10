@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = %q{MtgHand}
-  s.version     = "0.0.2"
+  s.version     = "0.1.0"
   s.author      = 'Yohan Piron'
   s.email       = 'yinfei84@gmail.com'
   s.date        = %q{2013-12-06}
