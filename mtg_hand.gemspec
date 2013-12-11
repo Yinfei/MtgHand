@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/Yinfei84/MtgHand.git"
   s.license     = "MIT"
   s.files       = [
-    "lib/MtgHand.rb"
+    "lib/mtg_hand.rb"
   ]
   s.require_paths = ["lib"]
 end
