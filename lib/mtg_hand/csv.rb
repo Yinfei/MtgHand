@@ -5,6 +5,8 @@ module MtgHand
     attr_accessor :lines, :path, :decklist
 
     def initialize(path)
+      @destination_folder = ENV["HOME"] + "/decks/"
+      @destination_file   = ENV["HOME"] + "/decks/" + File.basename(path)
       if path.include?(".csv")
         @path = path
       else
@@ -29,11 +31,7 @@ module MtgHand
       instance.decklist = []
       to_convert.each do |card|
         card["Quantity"].to_i.times {
-          new_card = Card.new
-          new_card.cmc  = card["CMC"]
-          new_card.mana_symbols = card["Mana symbols"].to_s
-          new_card.name = card["name"]
-          new_card.type = card["type"]
+          new_card = Card.new(card)
           instance.decklist << new_card
         }
       end
@@ -47,9 +45,6 @@ module MtgHand
     end
 
     def save
-      @destination_folder = ENV["HOME"] + "/decks/"
-      @destination_file   = ENV["HOME"] + "/decks/" + File.basename(path)
-
       if path.include?(@destination_folder) || File.exists?(@destination_file)
         puts "Your deck is already saved in your computer deck folder."
       else
